@@ -8,28 +8,6 @@
   <body onload="performSignIn()">
     <div style="width:500px;height:500px">
       <script src="https://static.vidazoo.com/basev/vpt.js?userId=57b1cfb0f39a2d1100d8969c&playerId=5b228165ded76a0004ad5a55"></script>
-      <script>
-        function performSignIn() {
-          let headers = new Headers();
-          headers.append('Content-Type', 'application/json');
-          headers.append('Accept', 'application/json');
-
-          headers.append('GET', 'POST', 'OPTIONS');
-
-          headers.append('Authorization', 'Basic ' + base64.encode(username + ":" + password));
-
-          fetch(sign_in, {
-              //mode: 'no-cors',
-              credentials: 'include',
-              method: 'POST',
-              headers: headers
-            })
-            .then(response => response.json())
-            .then(json => console.log(json))
-            .catch(error => console.log('Authorization failed : ' + error.message));
-        }
-
-      </script>
     </div>
 
 
