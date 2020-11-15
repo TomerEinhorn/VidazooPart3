@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    This is my test page - section 3
+  </head>
+
+  <body>
+    <div style="width:500px;height:500px">
+      <script src="//static.vidazoo.com/basev/vpt.js"></script>
+      <script type="text/javascript">
+        var options = {
+          userId: "57b1cfb0f39a2d1100d8969c",
+          playerId: "5b228165ded76a0004ad5a55",
+          auto: false,
+          el: "#player-div .inner-player"
+        };
+
+
+        vdz.create(options, function(err, player) {
+
+          if (err) {
+            //handle error
+          }
+
+          var $box = document.querySelector('.inner-player');
+          var isOpen = false;
+
+          // Case whnen ad found and finish playing
+          player.on("adFinish", function() {
+            console.log("player ad finished")
+            isOpen = false;
+            $box.style.height = "0";
+          });
+
+          // Case whnen ad found and finish playing
+          player.on("adStart", function() {
+            console.log("player ad started")
+            isOpen = true;
+            resizeBox();
+          });
+
+          function resizeBox() {
+            var boxRect = $box.getBoundingClientRect();
+            // var width = boxRect.width;
+            // var height = width * (9 / 16);
+
+            var width = 475;
+            var height = 200;
+
+            $box.style.height = height + "px"
+            player.resize(width, height);
+          }
+
+          window.addEventListener("resize", function(e) {
+            if (isOpen) {
+              resizeBox();
+            }
+          });
+
+          player.init();
+
+        });
+
+      </script>
+    </div>
+
+  </body>
+
+
+
+
+
+</html>
