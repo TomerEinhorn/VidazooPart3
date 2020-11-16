@@ -1,7 +1,7 @@
 function importExternal(url) {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
-    script.src = fetch(url, {mode: 'cors', headers:{'Access-Control-Allow-Origin':'*'}})
+    script.src = fetch(url, {mode: 'no-cors', headers:{'Access-Control-Allow-Origin':'*'}})
     .then(function (response) {
         return response.json();
     })
