@@ -1,7 +1,13 @@
 function importExternal(url) {
   return new Promise((resolve, reject) => {
     const script = document.createElement('script');
-    script.src = url;
+    script.src = fetch(url)
+    .then(function (response) {
+        return response.json();
+    })
+    .catch(function (err) {
+        console.log("Something went wrong!", err);
+    });
     script.async = true;
     script.onload = () => resolve(window['external_global_component']);
     script.onerror = reject;
