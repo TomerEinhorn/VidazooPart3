@@ -1,18 +1,26 @@
 function importExternal(url) {
   return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = fetch(url, {mode: 'no-cors', headers:{'Access-Control-Allow-Origin':'*'}})
+     fetch(url)
     .then(function (response) {
-        return response.json();
+       return response.text();
     })
-    .catch(function (err) {
-        console.log("Something went wrong!", err);
-    });
-    script.async = true;
+    .then(responseText => {
+        const script = document.createElement('script');
+        script.type= 'text/javascript';
+        script.text = responseText;
+ script.async = false;
     script.onload = () => resolve(window['external_global_component']);
     script.onerror = reject;
 
-    document.body.appendChild(script);
+    //document.body.appendChild(script);
+var s = document.getElementsByTagName('div')[0]; s.appendChild(script);
+
+        
+})
+    .catch(function (err) {
+        console.log("Something went wrong!", err);
+    });
+    
   });
 }
 
